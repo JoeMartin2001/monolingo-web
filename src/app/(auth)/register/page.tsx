@@ -1,11 +1,56 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { Textarea } from "@/components/ui/Textarea";
 import { languageOptions, levelOptions } from "@/config/constants/options";
+import { SignupUserInput } from "@/lib/auth/signup-user";
+import { register } from "./actions";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [nativeLanguage, setNativeLanguage] = useState("");
+  const [targetLanguage, setTargetLanguage] = useState("");
+  const [level, setLevel] = useState("");
+  const [bio, setBio] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const input: SignupUserInput = {
+      email,
+      password,
+      username,
+      nativeLanguage,
+      targetLanguage,
+      level,
+      bio,
+    };
+
+    setIsLoading(true);
+
+    const result = await register(input);
+
+    if (result.success) {
+      setError(null);
+
+      return router.replace("/dashboard");
+    }
+
+    setError(result.error || "Something went wrong");
+    setIsLoading(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4 py-5">
       <div className="max-w-md w-full">
@@ -30,7 +75,7 @@ const RegisterPage = () => {
 
         {/* Registration Form */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={onSubmit}>
             <Input
               id="username"
               name="username"
@@ -38,6 +83,8 @@ const RegisterPage = () => {
               label="Username"
               placeholder="Choose a username"
               required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
 
             <Input
@@ -47,6 +94,8 @@ const RegisterPage = () => {
               label="Email address"
               placeholder="Enter your email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <Input
@@ -56,6 +105,8 @@ const RegisterPage = () => {
               label="Password"
               placeholder="Create a password"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <Input
@@ -65,6 +116,8 @@ const RegisterPage = () => {
               label="Confirm password"
               placeholder="Confirm your password"
               required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
             <SelectInput
@@ -74,6 +127,8 @@ const RegisterPage = () => {
               placeholder="Select your native language"
               options={[...languageOptions, { value: "other", label: "Other" }]}
               required
+              value={nativeLanguage}
+              onChange={(e) => setNativeLanguage(e.target.value)}
             />
 
             <SelectInput
@@ -83,6 +138,8 @@ const RegisterPage = () => {
               placeholder="Select language to learn"
               options={languageOptions}
               required
+              value={targetLanguage}
+              onChange={(e) => setTargetLanguage(e.target.value)}
             />
 
             <SelectInput
@@ -92,6 +149,8 @@ const RegisterPage = () => {
               placeholder="Select your current level"
               options={levelOptions}
               required
+              value={level}
+              onChange={(e) => setLevel(e.target.value)}
             />
 
             <Textarea
@@ -100,6 +159,8 @@ const RegisterPage = () => {
               label="Bio (optional)"
               placeholder="Tell us about yourself..."
               rows={3}
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
             />
 
             <div className="flex items-start">
@@ -138,9 +199,12 @@ const RegisterPage = () => {
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              disabled={isLoading}
             >
-              Create account
+              {isLoading ? "Creating account..." : "Create account"}
             </button>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
           </form>
 
           {/* Divider */}

@@ -1,8 +1,52 @@
+"use client";
+
+import { authenticate } from "./actions";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
+import { useRouter } from "next/navigation";
+// import { gql } from "@apollo/client";
+// import getApolloClient from "@/lib/apollo-client";
+
+// const client = getApolloClient();
+
+// const LOGIN_USER = gql`
+//   mutation Login($email: String!, $password: String!) {
+//     login(input: { email: $email, password: $password }) {
+//       accessToken
+//       refreshToken
+//     }
+//   }
+// `;
 
 const LoginPage = () => {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    try {
+      const result = await authenticate(email, password, rememberMe);
+
+      if (result.success) {
+        return router.replace("/dashboard");
+      }
+
+      setError(result.error || "Something went wrong");
+    } catch (error) {
+      setError(error as string);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
@@ -26,13 +70,15 @@ const LoginPage = () => {
 
         {/* Login Form */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={onSubmit}>
             <Input
               id="email"
               name="email"
               type="email"
               label="Email address"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
 
@@ -42,6 +88,8 @@ const LoginPage = () => {
               type="password"
               label="Password"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
 
@@ -52,6 +100,8 @@ const LoginPage = () => {
                   name="remember-me"
                   type="checkbox"
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
                 />
                 <label
                   htmlFor="remember-me"
@@ -71,9 +121,12 @@ const LoginPage = () => {
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              disabled={isLoading}
             >
-              Sign in
+              {isLoading ? "Signing in..." : "Sign in"}
             </button>
+
+            {error && <p className="text-red-500 text-sm">{error}</p>}
           </form>
 
           {/* Divider */}
