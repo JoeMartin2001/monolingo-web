@@ -26,6 +26,7 @@ const AvatarInput: React.FC<AvatarInputProps> = ({
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       const file = acceptedFiles[0];
+
       if (file) {
         console.log("File selected:", file.name, file.type, file.size);
 
@@ -49,6 +50,7 @@ const AvatarInput: React.FC<AvatarInputProps> = ({
           console.error("❌ Image failed to load:", error);
           URL.revokeObjectURL(url);
         };
+
         img.src = url;
       }
     },
