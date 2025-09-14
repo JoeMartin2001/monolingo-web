@@ -3,7 +3,7 @@ import React from "react";
 import { Input } from "@/components/ui/Input";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { Textarea } from "@/components/ui/Textarea";
-import { languageOptions, levelOptions } from "@/constants/options";
+import { languageOptions, levelOptions } from "@/config/constants/options";
 
 const RegisterPage = () => {
   return (
