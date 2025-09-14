@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { Textarea } from "@/components/ui/Textarea";
+import AvatarInput from "@/components/ui/AvatarInput";
 import { languageOptions, levelOptions } from "@/config/constants/options";
 import { SignupUserInput } from "@/lib/auth/signup-user";
 import { register } from "./actions";
@@ -21,6 +22,7 @@ const RegisterPage = () => {
   const [targetLanguage, setTargetLanguage] = useState("");
   const [level, setLevel] = useState("");
   const [bio, setBio] = useState("");
+  const [avatar, setAvatar] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,6 +37,7 @@ const RegisterPage = () => {
       targetLanguage,
       level,
       bio,
+      avatar,
     };
 
     setIsLoading(true);
@@ -76,6 +79,29 @@ const RegisterPage = () => {
         {/* Registration Form */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
           <form className="space-y-6" onSubmit={onSubmit}>
+            {/* Avatar Upload */}
+            <div className="flex justify-center pb-6">
+              <AvatarInput
+                id="avatar"
+                name="avatar"
+                label="Profile Picture"
+                value={avatar ? URL.createObjectURL(avatar) : undefined}
+                onChange={setAvatar}
+              />
+            </div>
+
+            {/* Divider */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-200 dark:border-gray-600" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-3 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                  Account Details
+                </span>
+              </div>
+            </div>
+
             <Input
               id="username"
               name="username"
