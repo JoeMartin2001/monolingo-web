@@ -3,6 +3,12 @@
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
+const themes = [
+  { value: "light", label: "Light", icon: "☀️" },
+  { value: "dark", label: "Dark", icon: "🌙" },
+  { value: "system", label: "System", icon: "💻" },
+] as const;
+
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -11,12 +17,6 @@ export default function ThemeToggle() {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const themes = [
-    { value: "light", label: "Light", icon: "☀️" },
-    { value: "dark", label: "Dark", icon: "🌙" },
-    { value: "system", label: "System", icon: "💻" },
-  ] as const;
 
   const currentTheme = themes.find((t) => t.value === theme) || themes[2];
 

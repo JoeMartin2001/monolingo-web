@@ -1,5 +1,6 @@
 import { use } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
 export default function Home({
   params,
@@ -41,6 +42,8 @@ export default function Home({
           </div>
           <div className="flex items-center space-x-4">
             <ThemeToggle />
+            <LanguageSwitcher />
+
             <a
               href="/login"
               className="px-4 py-2 rounded-lg transition-colors hover:opacity-80"
