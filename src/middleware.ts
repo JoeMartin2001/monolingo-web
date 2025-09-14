@@ -1,41 +1,47 @@
-// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
+
+const intl = createMiddleware(routing);
 
 export function middleware(req: NextRequest) {
-  const accessToken = req.cookies.get("accessToken")?.value;
+  // 1) Ensure locale prefix or redirect based on NEXT_LOCALE/Accept-Language
+  const i18nResponse = intl(req);
+  if (i18nResponse) return i18nResponse;
+
+  // 2) Auth checks (locale-aware)
   const { pathname } = req.nextUrl;
+  const accessToken = req.cookies.get("accessToken")?.value;
 
-  // --- If not logged in ---
+  // Extract current locale from /{locale}/...
+  const locale = pathname.split("/")[1] || routing.defaultLocale;
+
+  const loginPath = `/${locale}/login`;
+  const registerPath = `/${locale}/register`;
+  const dashboardPath = `/${locale}/dashboard`;
+
+  const isDashboard = pathname.startsWith(dashboardPath);
+  const isAuthPage = pathname === loginPath || pathname === registerPath;
+  const isLocaleRoot = pathname === `/${locale}`; // e.g., /en
+
+  // Not logged in → block dashboard
   if (!accessToken) {
-    // trying to access protected routes
-    if (pathname.startsWith("/dashboard")) {
-      return NextResponse.redirect(new URL("/login", req.url));
+    if (isDashboard) {
+      return NextResponse.redirect(new URL(loginPath, req.url));
     }
-
-    return NextResponse.next(); // allow marketing, login, register
+    return NextResponse.next();
   }
 
-  // --- If logged in ---
-  // prevent accessing auth/marketing pages, always go to /dashboard
-  if (
-    pathname === "/" ||
-    pathname.startsWith("/login") ||
-    pathname.startsWith("/register") ||
-    pathname.startsWith("/(marketing)")
-  ) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
+  // Logged in → block auth pages and locale root
+  if (accessToken && (isAuthPage || isLocaleRoot)) {
+    return NextResponse.redirect(new URL(dashboardPath, req.url));
   }
 
   return NextResponse.next();
 }
 
+// Single, clean matcher: all non-static, non-API routes
 export const config = {
-  matcher: [
-    "/",
-    "/login",
-    "/register",
-    "/dashboard/:path*",
-    "/(marketing)/:path*",
-  ],
+  matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
 };

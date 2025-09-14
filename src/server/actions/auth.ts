@@ -3,12 +3,13 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { routing } from "@/i18n/routing";
 
-export async function logout() {
+export async function logout(formData: FormData) {
+  const locale = (formData.get("locale") as string) || routing.defaultLocale;
+
   (await cookies()).delete("accessToken");
   (await cookies()).delete("refreshToken");
 
-  revalidatePath("/login");
-  redirect("/login");
+  redirect(`/${locale}/login`);
 }

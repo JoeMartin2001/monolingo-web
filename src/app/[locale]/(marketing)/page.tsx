@@ -1,6 +1,15 @@
+import { use } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 
-export default function Home() {
+export default function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = use(params);
+
+  console.log(locale);
+
   return (
     <div
       className="min-h-screen"
