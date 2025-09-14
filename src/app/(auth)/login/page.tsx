@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 // import { gql } from "@apollo/client";
 // import getApolloClient from "@/lib/apollo-client";
 
@@ -48,28 +49,49 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4">
+    <div
+      className="min-h-screen flex items-center justify-center px-4"
+      style={{
+        background: "var(--background)",
+        backgroundImage:
+          "linear-gradient(to bottom right, var(--muted), var(--secondary))",
+      }}
+    >
       <div className="max-w-md w-full">
+        {/* Theme Toggle */}
+        <div className="flex justify-end mb-4">
+          <ThemeToggle />
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-6">
             <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">M</span>
             </div>
-            <span className="text-3xl font-bold text-gray-900 dark:text-white">
+            <span
+              className="text-3xl font-bold"
+              style={{ color: "var(--foreground)" }}
+            >
               Monolingo
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1
+            className="text-2xl font-bold mb-2"
+            style={{ color: "var(--foreground)" }}
+          >
             Welcome back
           </h1>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p style={{ color: "var(--muted-foreground)" }}>
             Sign in to continue your language learning journey
           </p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+        <div
+          className="rounded-2xl shadow-lg p-8"
+          style={{ backgroundColor: "var(--background)" }}
+        >
           <form className="space-y-6" onSubmit={onSubmit}>
             <Input
               id="email"
@@ -105,7 +127,8 @@ const LoginPage = () => {
                 />
                 <label
                   htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
+                  className="ml-2 block text-sm"
+                  style={{ color: "var(--foreground)" }}
                 >
                   Remember me
                 </label>
@@ -136,7 +159,13 @@ const LoginPage = () => {
                 <div className="w-full border-t border-gray-300 dark:border-gray-600" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">
+                <span
+                  className="px-2"
+                  style={{
+                    backgroundColor: "var(--background)",
+                    color: "var(--muted-foreground)",
+                  }}
+                >
                   Or continue with
                 </span>
               </div>
@@ -176,11 +205,12 @@ const LoginPage = () => {
 
           {/* Sign up link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
               Don&apos;t have an account?{" "}
               <Link
                 href="/register"
-                className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400"
+                className="font-medium"
+                style={{ color: "var(--primary)" }}
               >
                 Sign up for free
               </Link>
@@ -192,7 +222,8 @@ const LoginPage = () => {
         <div className="mt-6 text-center">
           <Link
             href="/"
-            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            className="text-sm"
+            style={{ color: "var(--muted-foreground)" }}
           >
             ← Back to home
           </Link>

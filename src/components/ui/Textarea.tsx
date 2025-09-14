@@ -13,24 +13,28 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div className="space-y-2">
         <label
           htmlFor={props.id}
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+          className="block text-sm font-medium"
+          style={{ color: "var(--foreground)" }}
         >
           {label}
         </label>
         <textarea
           ref={ref}
-          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white transition-colors resize-none ${
-            error
-              ? "border-red-300 dark:border-red-600"
-              : "border-gray-300 dark:border-gray-600"
-          } ${className}`}
+          className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none ${className}`}
+          style={{
+            backgroundColor: "var(--input)",
+            color: "var(--foreground)",
+            borderColor: error ? "var(--destructive)" : "var(--border)",
+          }}
           {...props}
         />
         {error && (
-          <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+          <p className="text-sm" style={{ color: "var(--destructive)" }}>
+            {error}
+          </p>
         )}
         {helperText && !error && (
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
             {helperText}
           </p>
         )}

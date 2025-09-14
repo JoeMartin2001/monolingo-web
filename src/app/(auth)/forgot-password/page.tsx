@@ -1,32 +1,54 @@
 import Link from "next/link";
 import React from "react";
 import { Input } from "@/components/ui/Input";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const ForgotPasswordPage = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center px-4">
+    <div
+      className="min-h-screen flex items-center justify-center px-4"
+      style={{
+        background: "var(--background)",
+        backgroundImage:
+          "linear-gradient(to bottom right, var(--muted), var(--secondary))",
+      }}
+    >
       <div className="max-w-md w-full">
+        {/* Theme Toggle */}
+        <div className="flex justify-end mb-4">
+          <ThemeToggle />
+        </div>
+
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-6">
             <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">M</span>
             </div>
-            <span className="text-3xl font-bold text-gray-900 dark:text-white">
+            <span
+              className="text-3xl font-bold"
+              style={{ color: "var(--foreground)" }}
+            >
               Monolingo
             </span>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h1
+            className="text-2xl font-bold mb-2"
+            style={{ color: "var(--foreground)" }}
+          >
             Forgot your password?
           </h1>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p style={{ color: "var(--muted-foreground)" }}>
             No worries! Enter your email address and we&apos;ll send you a link
             to reset your password.
           </p>
         </div>
 
         {/* Forgot Password Form */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+        <div
+          className="rounded-2xl shadow-lg p-8"
+          style={{ backgroundColor: "var(--background)" }}
+        >
           <form className="space-y-6">
             <Input
               id="email"
@@ -46,11 +68,18 @@ const ForgotPasswordPage = () => {
           </form>
 
           {/* Success Message (hidden by default) */}
-          <div className="mt-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+          <div
+            className="mt-6 p-4 rounded-lg"
+            style={{
+              backgroundColor: "var(--muted)",
+              border: "1px solid var(--border)",
+            }}
+          >
             <div className="flex">
               <div className="flex-shrink-0">
                 <svg
-                  className="h-5 w-5 text-green-400"
+                  className="h-5 w-5"
+                  style={{ color: "var(--primary)" }}
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -62,7 +91,7 @@ const ForgotPasswordPage = () => {
                 </svg>
               </div>
               <div className="ml-3">
-                <p className="text-sm text-green-800 dark:text-green-200">
+                <p className="text-sm" style={{ color: "var(--foreground)" }}>
                   Password reset link sent! Check your email for instructions.
                 </p>
               </div>
@@ -71,11 +100,12 @@ const ForgotPasswordPage = () => {
 
           {/* Back to login */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
               Remember your password?{" "}
               <Link
                 href="/login"
-                className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400"
+                className="font-medium"
+                style={{ color: "var(--primary)" }}
               >
                 Sign in
               </Link>
@@ -87,7 +117,8 @@ const ForgotPasswordPage = () => {
         <div className="mt-6 text-center">
           <Link
             href="/"
-            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
+            className="text-sm"
+            style={{ color: "var(--muted-foreground)" }}
           >
             ← Back to home
           </Link>

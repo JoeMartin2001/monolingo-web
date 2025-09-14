@@ -1,27 +1,51 @@
+import ThemeToggle from "@/components/ThemeToggle";
+
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div
+      className="min-h-screen"
+      style={{
+        background: "var(--background)",
+        backgroundImage:
+          "linear-gradient(to bottom right, var(--muted), var(--secondary))",
+      }}
+    >
       {/* Navigation */}
-      <nav className="px-6 py-4">
+      <nav
+        className="px-6 py-4 border-b"
+        style={{
+          backgroundColor: "var(--background)",
+          borderColor: "var(--border)",
+        }}
+      >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">M</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">
+            <span
+              className="text-2xl font-bold"
+              style={{ color: "var(--foreground)" }}
+            >
               Monolingo
             </span>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
             <a
               href="/login"
-              className="px-4 py-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="px-4 py-2 rounded-lg transition-colors hover:opacity-80"
+              style={{ color: "var(--muted-foreground)" }}
             >
               Sign In
             </a>
             <a
               href="/register"
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-2 rounded-lg transition-colors"
+              style={{
+                backgroundColor: "var(--primary)",
+                color: "var(--primary-foreground)",
+              }}
             >
               Get Started
             </a>
@@ -32,14 +56,20 @@ export default function Home() {
       {/* Hero Section */}
       <section className="px-6 py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+          <h1
+            className="text-5xl md:text-6xl font-bold mb-6"
+            style={{ color: "var(--foreground)" }}
+          >
             Learn Languages with
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               {" "}
               AI & Community
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+          <p
+            className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
+            style={{ color: "var(--muted-foreground)" }}
+          >
             Connect with language partners, practice with AI bots, join group
             discussions, and build communities. Master Uzbek, Russian, English,
             Kazakh, Kyrgyz, Tajik, and Chinese.
@@ -62,13 +92,22 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="px-6 py-20 bg-white dark:bg-gray-900">
+      <section
+        className="px-6 py-20"
+        style={{ backgroundColor: "var(--muted)" }}
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2
+              className="text-4xl md:text-5xl font-bold mb-4"
+              style={{ color: "var(--foreground)" }}
+            >
               How Monolingo Works
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p
+              className="text-xl max-w-2xl mx-auto"
+              style={{ color: "var(--muted-foreground)" }}
+            >
               Four simple ways to master languages and connect with learners
               across Central Asia.
             </p>
@@ -92,10 +131,16 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: "var(--foreground)" }}
+              >
                 Chat with Language Mates
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p
+                className="text-lg"
+                style={{ color: "var(--muted-foreground)" }}
+              >
                 Find native speakers and fellow learners for one-on-one
                 conversations. Practice speaking, get feedback, and build
                 lasting friendships.
@@ -119,10 +164,16 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: "var(--foreground)" }}
+              >
                 Practice with AI Bots
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p
+                className="text-lg"
+                style={{ color: "var(--muted-foreground)" }}
+              >
                 Get 24/7 practice with intelligent AI tutors that adapt to your
                 learning style. Practice anytime, anywhere, and track your
                 progress.
@@ -146,10 +197,16 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: "var(--foreground)" }}
+              >
                 Topic Discussion Group Calls
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p
+                className="text-lg"
+                style={{ color: "var(--muted-foreground)" }}
+              >
                 Join moderated group discussions on interesting topics. Practice
                 speaking with multiple learners and get expert guidance from
                 native speakers.
@@ -173,10 +230,16 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3
+                className="text-2xl font-bold mb-4"
+                style={{ color: "var(--foreground)" }}
+              >
                 Join Communities
               </h3>
-              <p className="text-lg text-gray-600 dark:text-gray-300">
+              <p
+                className="text-lg"
+                style={{ color: "var(--muted-foreground)" }}
+              >
                 Become part of vibrant learning communities. Share resources,
                 celebrate milestones, and help others on their language learning
                 journey.
@@ -214,7 +277,13 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-12 bg-gray-900 text-white">
+      <footer
+        className="px-6 py-12"
+        style={{
+          backgroundColor: "var(--secondary)",
+          color: "var(--secondary-foreground)",
+        }}
+      >
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
@@ -222,10 +291,10 @@ export default function Home() {
             </div>
             <span className="text-2xl font-bold">Monolingo</span>
           </div>
-          <p className="text-gray-400 mb-4">
+          <p className="mb-4" style={{ color: "var(--muted-foreground)" }}>
             The complete language learning platform for Central Asia.
           </p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
             &copy; 2024 Monolingo. All rights reserved.
           </p>
         </div>

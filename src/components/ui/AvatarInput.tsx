@@ -82,24 +82,36 @@ const AvatarInput: React.FC<AvatarInputProps> = ({
   };
 
   const getDropzoneClassName = () => {
-    let baseClasses = `
-      relative w-40 h-40 rounded-full border-2 border-dashed cursor-pointer transition-all duration-300 group
-    `;
+    return "relative w-40 h-40 rounded-full border-2 border-dashed cursor-pointer transition-all duration-300 group";
+  };
 
+  const getDropzoneStyle = () => {
     if (isDragReject || fileRejections.length > 0) {
-      baseClasses += " border-red-400 bg-red-50 dark:bg-red-900/20 scale-105";
+      return {
+        borderColor: "var(--destructive)",
+        backgroundColor: "var(--muted)",
+        transform: "scale(1.05)",
+      };
     } else if (isDragActive) {
-      baseClasses +=
-        " border-blue-500 bg-blue-50 dark:bg-blue-900/20 scale-105 shadow-lg";
+      return {
+        borderColor: "var(--primary)",
+        backgroundColor: "var(--accent)",
+        transform: "scale(1.05)",
+        boxShadow:
+          "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      };
     } else if (preview) {
-      baseClasses +=
-        " border-solid border-gray-300 dark:border-gray-600 shadow-lg hover:shadow-xl";
+      return {
+        borderStyle: "solid",
+        borderColor: "var(--border)",
+        boxShadow:
+          "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+      };
     } else {
-      baseClasses +=
-        " border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:scale-105";
+      return {
+        borderColor: "var(--border)",
+      };
     }
-
-    return baseClasses;
   };
 
   const getErrorMessage = () => {
@@ -120,14 +132,23 @@ const AvatarInput: React.FC<AvatarInputProps> = ({
     <div className="space-y-4">
       <label
         htmlFor={id}
-        className="block text-sm font-medium text-gray-700 dark:text-gray-300 text-center"
+        className="block text-sm font-medium text-center"
+        style={{ color: "var(--foreground)" }}
       >
         {label}
-        {required && <span className="text-red-500 ml-1">*</span>}
+        {required && (
+          <span className="ml-1" style={{ color: "var(--destructive)" }}>
+            *
+          </span>
+        )}
       </label>
 
       <div className="flex justify-center">
-        <div {...getRootProps()} className={getDropzoneClassName()}>
+        <div
+          {...getRootProps()}
+          className={getDropzoneClassName()}
+          style={getDropzoneStyle()}
+        >
           <input {...getInputProps()} id={id} name={name} required={required} />
 
           {preview ? (
@@ -152,59 +173,59 @@ const AvatarInput: React.FC<AvatarInputProps> = ({
               </button>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center h-full text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors duration-200">
+            <div
+              className="flex flex-col items-center justify-center h-full transition-colors duration-200"
+              style={{ color: "var(--muted-foreground)" }}
+            >
               <div className="relative">
                 <div
-                  className={`
-                  w-16 h-16 rounded-full flex items-center justify-center mb-2 transition-all duration-200
-                  ${
-                    isDragReject || fileRejections.length > 0
-                      ? "bg-red-100 dark:bg-red-900/30"
-                      : isDragActive
-                      ? "bg-blue-200 dark:bg-blue-800/40"
-                      : "bg-gray-100 dark:bg-gray-700 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30"
-                  }
-                `}
+                  className="w-16 h-16 rounded-full flex items-center justify-center mb-2 transition-all duration-200"
+                  style={{
+                    backgroundColor:
+                      isDragReject || fileRejections.length > 0
+                        ? "var(--muted)"
+                        : isDragActive
+                        ? "var(--accent)"
+                        : "var(--muted)",
+                  }}
                 >
-                  <UserIcon
-                    className={`
-                      w-8 h-8 transition-colors duration-200
-                      ${
+                  <div
+                    style={{
+                      color:
                         isDragReject || fileRejections.length > 0
-                          ? "text-red-500 dark:text-red-400"
+                          ? "var(--destructive)"
                           : isDragActive
-                          ? "text-blue-600 dark:text-blue-400"
-                          : "text-gray-500 dark:text-gray-400 group-hover:text-blue-500 dark:group-hover:text-blue-400"
-                      }
-                    `}
-                  />
+                          ? "var(--primary)"
+                          : "var(--muted-foreground)",
+                    }}
+                  >
+                    <UserIcon className="w-8 h-8 transition-colors duration-200" />
+                  </div>
                 </div>
                 <div
-                  className={`
-                  absolute -bottom-1 -right-1 w-6 h-6 text-white rounded-full flex items-center justify-center text-xs transition-colors duration-200
-                  ${
-                    isDragReject || fileRejections.length > 0
-                      ? "bg-red-500"
-                      : isDragActive
-                      ? "bg-blue-600"
-                      : "bg-blue-500 group-hover:bg-blue-600"
-                  }
-                `}
+                  className="absolute -bottom-1 -right-1 w-6 h-6 text-white rounded-full flex items-center justify-center text-xs transition-colors duration-200"
+                  style={{
+                    backgroundColor:
+                      isDragReject || fileRejections.length > 0
+                        ? "var(--destructive)"
+                        : isDragActive
+                        ? "var(--primary)"
+                        : "var(--primary)",
+                  }}
                 >
                   <PlusIcon className="w-3 h-3" />
                 </div>
               </div>
               <span
-                className={`
-                text-sm font-medium text-center transition-colors duration-200
-                ${
-                  isDragReject || fileRejections.length > 0
-                    ? "text-red-500 dark:text-red-400"
-                    : isDragActive
-                    ? "text-blue-600 dark:text-blue-400"
-                    : "text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-blue-400"
-                }
-              `}
+                className="text-sm font-medium text-center transition-colors duration-200"
+                style={{
+                  color:
+                    isDragReject || fileRejections.length > 0
+                      ? "var(--destructive)"
+                      : isDragActive
+                      ? "var(--primary)"
+                      : "var(--muted-foreground)",
+                }}
               >
                 {isDragReject || fileRejections.length > 0
                   ? "Invalid file"
@@ -220,7 +241,10 @@ const AvatarInput: React.FC<AvatarInputProps> = ({
       {/* Error Message */}
       {getErrorMessage() && (
         <div className="text-center">
-          <p className="text-sm text-red-500 dark:text-red-400 font-medium">
+          <p
+            className="text-sm font-medium"
+            style={{ color: "var(--destructive)" }}
+          >
             {getErrorMessage()}
           </p>
         </div>
@@ -228,10 +252,10 @@ const AvatarInput: React.FC<AvatarInputProps> = ({
 
       {/* Instructions */}
       <div className="text-center space-y-1">
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
           Drag & drop or click to upload
         </p>
-        <p className="text-xs text-gray-500 dark:text-gray-500">
+        <p className="text-xs" style={{ color: "var(--muted-foreground)" }}>
           Max 5MB • JPG, PNG, GIF, or WebP
         </p>
       </div>
