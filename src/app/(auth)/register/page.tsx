@@ -205,19 +205,19 @@ const RegisterPage = () => {
                   className="text-gray-700 dark:text-gray-300"
                 >
                   I agree to the{" "}
-                  <a
-                    href="#"
+                  <Link
+                    href="/terms"
                     className="text-blue-600 hover:text-blue-500 dark:text-blue-400"
                   >
                     Terms of Service
-                  </a>{" "}
+                  </Link>{" "}
                   and{" "}
-                  <a
-                    href="#"
+                  <Link
+                    href="/privacy"
                     className="text-blue-600 hover:text-blue-500 dark:text-blue-400"
                   >
                     Privacy Policy
-                  </a>
+                  </Link>
                 </label>
               </div>
             </div>
