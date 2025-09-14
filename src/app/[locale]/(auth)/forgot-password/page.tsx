@@ -1,9 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
 import { Input } from "@/components/ui/Input";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useTranslations } from "next-intl";
 
 const ForgotPasswordPage = () => {
+  const t = useTranslations("ForgotPasswordPage");
+
   return (
     <div
       className="min-h-screen flex items-center justify-center px-4"
@@ -36,11 +41,10 @@ const ForgotPasswordPage = () => {
             className="text-2xl font-bold mb-2"
             style={{ color: "var(--foreground)" }}
           >
-            Forgot your password?
+            {t("forgotYourPassword")}
           </h1>
           <p style={{ color: "var(--muted-foreground)" }}>
-            No worries! Enter your email address and we&apos;ll send you a link
-            to reset your password.
+            {t("noWorriesDescription")}
           </p>
         </div>
 
@@ -54,8 +58,8 @@ const ForgotPasswordPage = () => {
               id="email"
               name="email"
               type="email"
-              label="Email address"
-              placeholder="Enter your email address"
+              label={t("emailAddress")}
+              placeholder={t("enterYourEmailAddress")}
               required
             />
 
@@ -63,7 +67,7 @@ const ForgotPasswordPage = () => {
               type="submit"
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
-              Send reset link
+              {t("sendResetLink")}
             </button>
           </form>
 
@@ -92,7 +96,7 @@ const ForgotPasswordPage = () => {
               </div>
               <div className="ml-3">
                 <p className="text-sm" style={{ color: "var(--foreground)" }}>
-                  Password reset link sent! Check your email for instructions.
+                  {t("passwordResetLinkSent")}
                 </p>
               </div>
             </div>
@@ -101,13 +105,13 @@ const ForgotPasswordPage = () => {
           {/* Back to login */}
           <div className="mt-6 text-center">
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
-              Remember your password?{" "}
+              {t("rememberYourPassword")}{" "}
               <Link
                 href="/login"
                 className="font-medium"
                 style={{ color: "var(--primary)" }}
               >
-                Sign in
+                {t("signIn")}
               </Link>
             </p>
           </div>
@@ -120,7 +124,7 @@ const ForgotPasswordPage = () => {
             className="text-sm"
             style={{ color: "var(--muted-foreground)" }}
           >
-            ← Back to home
+            {t("backToHome")}
           </Link>
         </div>
       </div>

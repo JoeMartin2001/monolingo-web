@@ -13,9 +13,11 @@ import { useRouter } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import FacebookIcon from "@/components/icons/FacebookIcon";
+import { useTranslations } from "next-intl";
 
 const RegisterPage = () => {
   const router = useRouter();
+  const t = useTranslations("RegisterPage");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +30,12 @@ const RegisterPage = () => {
   const [avatar, setAvatar] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Create language options with translated "Other" option
+  const languageOptionsWithOther = [
+    ...languageOptions,
+    { value: "other", label: t("other") },
+  ];
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,11 +97,10 @@ const RegisterPage = () => {
             className="text-2xl font-bold mb-2"
             style={{ color: "var(--foreground)" }}
           >
-            Create your account
+            {t("createYourAccount")}
           </h1>
           <p style={{ color: "var(--muted-foreground)" }}>
-            Join thousands of learners across Central Asia and start your
-            language learning journey
+            {t("joinThousandsOfLearners")}
           </p>
         </div>
 
@@ -108,7 +115,7 @@ const RegisterPage = () => {
               <AvatarInput
                 id="avatar"
                 name="avatar"
-                label="Profile Picture"
+                label={t("profilePicture")}
                 value={avatar ? URL.createObjectURL(avatar) : undefined}
                 onChange={setAvatar}
               />
@@ -130,7 +137,7 @@ const RegisterPage = () => {
                     color: "var(--muted-foreground)",
                   }}
                 >
-                  Account Details
+                  {t("accountDetails")}
                 </span>
               </div>
             </div>
@@ -139,8 +146,8 @@ const RegisterPage = () => {
               id="username"
               name="username"
               type="text"
-              label="Username"
-              placeholder="Choose a username"
+              label={t("username")}
+              placeholder={t("chooseUsername")}
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -150,8 +157,8 @@ const RegisterPage = () => {
               id="email"
               name="email"
               type="email"
-              label="Email address"
-              placeholder="Enter your email"
+              label={t("emailAddress")}
+              placeholder={t("enterYourEmail")}
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -161,8 +168,8 @@ const RegisterPage = () => {
               id="password"
               name="password"
               type="password"
-              label="Password"
-              placeholder="Create a password"
+              label={t("password")}
+              placeholder={t("createPassword")}
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -172,8 +179,8 @@ const RegisterPage = () => {
               id="confirmPassword"
               name="confirmPassword"
               type="password"
-              label="Confirm password"
-              placeholder="Confirm your password"
+              label={t("confirmPassword")}
+              placeholder={t("confirmYourPassword")}
               required
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -182,9 +189,9 @@ const RegisterPage = () => {
             <SelectInput
               id="nativeLanguage"
               name="nativeLanguage"
-              label="Native language"
-              placeholder="Select your native language"
-              options={[...languageOptions, { value: "other", label: "Other" }]}
+              label={t("nativeLanguage")}
+              placeholder={t("selectNativeLanguage")}
+              options={languageOptionsWithOther}
               required
               value={nativeLanguage}
               onChange={(e) => setNativeLanguage(e.target.value)}
@@ -193,8 +200,8 @@ const RegisterPage = () => {
             <SelectInput
               id="targetLanguage"
               name="targetLanguage"
-              label="Target language"
-              placeholder="Select language to learn"
+              label={t("targetLanguage")}
+              placeholder={t("selectLanguageToLearn")}
               options={languageOptions}
               required
               value={targetLanguage}
@@ -204,8 +211,8 @@ const RegisterPage = () => {
             <SelectInput
               id="level"
               name="level"
-              label="Current proficiency level"
-              placeholder="Select your current level"
+              label={t("currentProficiencyLevel")}
+              placeholder={t("selectCurrentLevel")}
               options={levelOptions}
               required
               value={level}
@@ -215,8 +222,8 @@ const RegisterPage = () => {
             <Textarea
               id="bio"
               name="bio"
-              label="Bio (optional)"
-              placeholder="Tell us about yourself..."
+              label={t("bioOptional")}
+              placeholder={t("tellUsAboutYourself")}
               rows={3}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
@@ -238,13 +245,13 @@ const RegisterPage = () => {
               </div>
               <div className="ml-3 text-sm">
                 <label htmlFor="terms" style={{ color: "var(--foreground)" }}>
-                  I agree to the{" "}
+                  {t("agreeToTerms")}{" "}
                   <Link href="/terms" style={{ color: "var(--primary)" }}>
-                    Terms of Service
+                    {t("termsOfService")}
                   </Link>{" "}
-                  and{" "}
+                  {t("and")}{" "}
                   <Link href="/privacy" style={{ color: "var(--primary)" }}>
-                    Privacy Policy
+                    {t("privacyPolicy")}
                   </Link>
                 </label>
               </div>
@@ -255,7 +262,7 @@ const RegisterPage = () => {
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               disabled={isLoading}
             >
-              {isLoading ? "Creating account..." : "Create account"}
+              {isLoading ? t("creatingAccount") : t("createAccount")}
             </button>
 
             {error && (
@@ -282,7 +289,7 @@ const RegisterPage = () => {
                     color: "var(--muted-foreground)",
                   }}
                 >
-                  Or continue with
+                  {t("orContinueWith")}
                 </span>
               </div>
             </div>
@@ -305,7 +312,7 @@ const RegisterPage = () => {
               }}
             >
               <GoogleIcon className="w-5 h-5" />
-              <span className="ml-2">Google</span>
+              <span className="ml-2">{t("google")}</span>
             </button>
             <button
               className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
@@ -322,20 +329,20 @@ const RegisterPage = () => {
               }}
             >
               <FacebookIcon className="w-5 h-5" />
-              <span className="ml-2">Facebook</span>
+              <span className="ml-2">{t("facebook")}</span>
             </button>
           </div>
 
           {/* Sign in link */}
           <div className="mt-6 text-center">
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
-              Already have an account?{" "}
+              {t("alreadyHaveAccount")}{" "}
               <Link
                 href="/login"
                 className="font-medium"
                 style={{ color: "var(--primary)" }}
               >
-                Sign in
+                {t("signIn")}
               </Link>
             </p>
           </div>
@@ -348,7 +355,7 @@ const RegisterPage = () => {
             className="text-sm"
             style={{ color: "var(--muted-foreground)" }}
           >
-            ← Back to home
+            {t("backToHome")}
           </Link>
         </div>
       </div>

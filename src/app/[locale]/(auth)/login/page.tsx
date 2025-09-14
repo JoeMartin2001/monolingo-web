@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import FacebookIcon from "@/components/icons/FacebookIcon";
+import { useTranslations } from "next-intl";
 // import { gql } from "@apollo/client";
 // import getApolloClient from "@/lib/apollo-client";
 
@@ -24,6 +25,7 @@ import FacebookIcon from "@/components/icons/FacebookIcon";
 
 const LoginPage = () => {
   const router = useRouter();
+  const t = useTranslations("LoginPage");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -82,10 +84,10 @@ const LoginPage = () => {
             className="text-2xl font-bold mb-2"
             style={{ color: "var(--foreground)" }}
           >
-            Welcome back
+            {t("welcomeBack")}
           </h1>
           <p style={{ color: "var(--muted-foreground)" }}>
-            Sign in to continue your language learning journey
+            {t("signInToContinue")}
           </p>
         </div>
 
@@ -99,8 +101,8 @@ const LoginPage = () => {
               id="email"
               name="email"
               type="email"
-              label="Email address"
-              placeholder="Enter your email"
+              label={t("emailAddress")}
+              placeholder={t("enterYourEmail")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -110,8 +112,8 @@ const LoginPage = () => {
               id="password"
               name="password"
               type="password"
-              label="Password"
-              placeholder="Enter your password"
+              label={t("password")}
+              placeholder={t("enterYourPassword")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -136,7 +138,7 @@ const LoginPage = () => {
                   className="ml-2 block text-sm"
                   style={{ color: "var(--foreground)" }}
                 >
-                  Remember me
+                  {t("rememberMe")}
                 </label>
               </div>
               <Link
@@ -144,7 +146,7 @@ const LoginPage = () => {
                 className="text-sm hover:opacity-80 transition-opacity"
                 style={{ color: "var(--primary)" }}
               >
-                Forgot password?
+                {t("forgotPassword")}
               </Link>
             </div>
 
@@ -153,7 +155,7 @@ const LoginPage = () => {
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               disabled={isLoading}
             >
-              {isLoading ? "Signing in..." : "Sign in"}
+              {isLoading ? t("signingIn") : t("signIn")}
             </button>
 
             {error && (
@@ -167,7 +169,7 @@ const LoginPage = () => {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div 
+                <div
                   className="w-full border-t"
                   style={{ borderColor: "var(--border)" }}
                 />
@@ -180,7 +182,7 @@ const LoginPage = () => {
                     color: "var(--muted-foreground)",
                   }}
                 >
-                  Or continue with
+                  {t("orContinueWith")}
                 </span>
               </div>
             </div>
@@ -188,7 +190,7 @@ const LoginPage = () => {
 
           {/* Social Login */}
           <div className="mt-6 grid grid-cols-2 gap-3">
-            <button 
+            <button
               className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
               style={{
                 borderColor: "var(--border)",
@@ -203,9 +205,9 @@ const LoginPage = () => {
               }}
             >
               <GoogleIcon className="w-5 h-5" />
-              <span className="ml-2">Google</span>
+              <span className="ml-2">{t("google")}</span>
             </button>
-            <button 
+            <button
               className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
               style={{
                 borderColor: "var(--border)",
@@ -220,20 +222,20 @@ const LoginPage = () => {
               }}
             >
               <FacebookIcon className="w-5 h-5" />
-              <span className="ml-2">Facebook</span>
+              <span className="ml-2">{t("facebook")}</span>
             </button>
           </div>
 
           {/* Sign up link */}
           <div className="mt-6 text-center">
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
-              Don&apos;t have an account?{" "}
+              {t("dontHaveAccount")}{" "}
               <Link
                 href="/register"
                 className="font-medium"
                 style={{ color: "var(--primary)" }}
               >
-                Sign up for free
+                {t("signUpForFree")}
               </Link>
             </p>
           </div>
@@ -246,7 +248,7 @@ const LoginPage = () => {
             className="text-sm"
             style={{ color: "var(--muted-foreground)" }}
           >
-            ← Back to home
+            {t("backToHome")}
           </Link>
         </div>
       </div>
