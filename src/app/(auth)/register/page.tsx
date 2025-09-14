@@ -3,11 +3,7 @@ import React from "react";
 import { Input } from "@/components/ui/Input";
 import { SelectInput } from "@/components/ui/SelectInput";
 import { Textarea } from "@/components/ui/Textarea";
-import {
-  languageOptions,
-  levelOptions,
-  roleOptions,
-} from "@/constants/options";
+import { languageOptions, levelOptions } from "@/constants/options";
 
 const RegisterPage = () => {
   return (
@@ -95,15 +91,6 @@ const RegisterPage = () => {
               label="Current proficiency level"
               placeholder="Select your current level"
               options={levelOptions}
-              required
-            />
-
-            <SelectInput
-              id="role"
-              name="role"
-              label="I want to be a"
-              placeholder="Select your role"
-              options={roleOptions}
               required
             />
 
