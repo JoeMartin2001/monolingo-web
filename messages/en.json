@@ -1,4 +1,32 @@
 {
+  "LandingPage": {
+    "signIn": "Sign In",
+    "getStarted": "Get Started",
+    "learnLanguagesWith": "Learn Languages with",
+    "aiAndCommunity": "AI & Community",
+    "description": "Connect with language partners, practice with AI bots, join group discussions, and build communities. Master Uzbek, Russian, English, Kazakh, Kyrgyz, Tajik, and Chinese.",
+    "startLearningFree": "Start Learning Free",
+    "learnMore": "Learn More",
+    "howMonolingoWorks": "How Monolingo Works",
+    "howMonolingoWorksDescription": "Four simple ways to master languages and connect with learners across Central Asia.",
+    "chatWithLanguageMates": "Chat with Language Mates",
+    "chatWithLanguageMatesDescription": "Find native speakers and fellow learners for one-on-one conversations. Practice speaking, get feedback, and build lasting friendships.",
+    "practiceWithAIBots": "Practice with AI Bots",
+    "practiceWithAIBotsDescription": "Get 24/7 practice with intelligent AI tutors that adapt to your learning style. Practice anytime, anywhere, and track your progress.",
+    "topicDiscussionGroupCalls": "Topic Discussion Group Calls",
+    "topicDiscussionGroupCallsDescription": "Join moderated group discussions on interesting topics. Practice speaking with multiple learners and get expert guidance from native speakers.",
+    "joinCommunities": "Join Communities",
+    "joinCommunitiesDescription": "Become part of vibrant learning communities. Share resources, celebrate milestones, and help others on their language learning journey.",
+    "readyToStartLearning": "Ready to Start Learning?",
+    "readyToStartLearningDescription": "Join thousands of learners across Central Asia who are mastering languages together.",
+    "completeLanguageLearningPlatform": "The complete language learning platform for Central Asia.",
+    "allRightsReserved": "All rights reserved."
+  },
+  "ThemeToggle": {
+    "light": "Day",
+    "dark": "Night",
+    "system": "System"
+  },
   "LogoutButton": {
     "logout": "Logout"
   }

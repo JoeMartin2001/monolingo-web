@@ -2,21 +2,23 @@
 
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
-
-const themes = [
-  { value: "light", label: "Light", icon: "☀️" },
-  { value: "dark", label: "Dark", icon: "🌙" },
-  { value: "system", label: "System", icon: "💻" },
-] as const;
+import { useTranslations } from "next-intl";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("ThemeToggle");
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const themes = [
+    { value: "light", label: t("light"), icon: "☀️" },
+    { value: "dark", label: t("dark"), icon: "🌙" },
+    { value: "system", label: t("system"), icon: "💻" },
+  ] as const;
 
   const currentTheme = themes.find((t) => t.value === theme) || themes[2];
 
@@ -27,7 +29,7 @@ export default function ThemeToggle() {
         style={{ color: "var(--muted-foreground)" }}
       >
         <span className="text-lg">💻</span>
-        <span className="hidden sm:inline">System</span>
+        <span className="hidden sm:inline">{t("system")}</span>
       </div>
     );
   }

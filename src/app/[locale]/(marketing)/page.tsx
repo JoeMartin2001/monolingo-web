@@ -1,15 +1,9 @@
-import { use } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { getTranslations } from "next-intl/server";
 
-export default function Home({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = use(params);
-
-  console.log(locale);
+export default async function Home() {
+  const t = await getTranslations("LandingPage");
 
   return (
     <div
@@ -49,7 +43,7 @@ export default function Home({
               className="px-4 py-2 rounded-lg transition-colors hover:opacity-80"
               style={{ color: "var(--muted-foreground)" }}
             >
-              Sign In
+              {t("signIn")}
             </a>
             <a
               href="/register"
@@ -59,7 +53,7 @@ export default function Home({
                 color: "var(--primary-foreground)",
               }}
             >
-              Get Started
+              {t("getStarted")}
             </a>
           </div>
         </div>
@@ -72,32 +66,30 @@ export default function Home({
             className="text-5xl md:text-6xl font-bold mb-6"
             style={{ color: "var(--foreground)" }}
           >
-            Learn Languages with
+            {t("learnLanguagesWith")}
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               {" "}
-              AI & Community
+              {t("aiAndCommunity")}
             </span>
           </h1>
           <p
             className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
             style={{ color: "var(--muted-foreground)" }}
           >
-            Connect with language partners, practice with AI bots, join group
-            discussions, and build communities. Master Uzbek, Russian, English,
-            Kazakh, Kyrgyz, Tajik, and Chinese.
+            {t("description")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/register"
               className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-              Start Learning Free
+              {t("startLearningFree")}
             </a>
             <a
               href="/register"
               className="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 text-lg font-semibold rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300"
             >
-              Learn More
+              {t("learnMore")}
             </a>
           </div>
         </div>
@@ -114,14 +106,13 @@ export default function Home({
               className="text-4xl md:text-5xl font-bold mb-4"
               style={{ color: "var(--foreground)" }}
             >
-              How Monolingo Works
+              {t("howMonolingoWorks")}
             </h2>
             <p
               className="text-xl max-w-2xl mx-auto"
               style={{ color: "var(--muted-foreground)" }}
             >
-              Four simple ways to master languages and connect with learners
-              across Central Asia.
+              {t("howMonolingoWorksDescription")}
             </p>
           </div>
 
@@ -147,15 +138,13 @@ export default function Home({
                 className="text-2xl font-bold mb-4"
                 style={{ color: "var(--foreground)" }}
               >
-                Chat with Language Mates
+                {t("chatWithLanguageMates")}
               </h3>
               <p
                 className="text-lg"
                 style={{ color: "var(--muted-foreground)" }}
               >
-                Find native speakers and fellow learners for one-on-one
-                conversations. Practice speaking, get feedback, and build
-                lasting friendships.
+                {t("chatWithLanguageMatesDescription")}
               </p>
             </div>
 
@@ -180,15 +169,13 @@ export default function Home({
                 className="text-2xl font-bold mb-4"
                 style={{ color: "var(--foreground)" }}
               >
-                Practice with AI Bots
+                {t("practiceWithAIBots")}
               </h3>
               <p
                 className="text-lg"
                 style={{ color: "var(--muted-foreground)" }}
               >
-                Get 24/7 practice with intelligent AI tutors that adapt to your
-                learning style. Practice anytime, anywhere, and track your
-                progress.
+                {t("practiceWithAIBotsDescription")}
               </p>
             </div>
 
@@ -213,15 +200,13 @@ export default function Home({
                 className="text-2xl font-bold mb-4"
                 style={{ color: "var(--foreground)" }}
               >
-                Topic Discussion Group Calls
+                {t("topicDiscussionGroupCalls")}
               </h3>
               <p
                 className="text-lg"
                 style={{ color: "var(--muted-foreground)" }}
               >
-                Join moderated group discussions on interesting topics. Practice
-                speaking with multiple learners and get expert guidance from
-                native speakers.
+                {t("topicDiscussionGroupCallsDescription")}
               </p>
             </div>
 
@@ -246,15 +231,13 @@ export default function Home({
                 className="text-2xl font-bold mb-4"
                 style={{ color: "var(--foreground)" }}
               >
-                Join Communities
+                {t("joinCommunities")}
               </h3>
               <p
                 className="text-lg"
                 style={{ color: "var(--muted-foreground)" }}
               >
-                Become part of vibrant learning communities. Share resources,
-                celebrate milestones, and help others on their language learning
-                journey.
+                {t("joinCommunitiesDescription")}
               </p>
             </div>
           </div>
@@ -265,24 +248,23 @@ export default function Home({
       <section className="px-6 py-20 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Start Learning?
+            {t("readyToStartLearning")}
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Join thousands of learners across Central Asia who are mastering
-            languages together.
+            {t("readyToStartLearningDescription")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="/register"
               className="px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-              Start Learning Free
+              {t("startLearningFree")}
             </a>
             <a
               href="/register"
               className="px-8 py-4 border-2 border-white text-white text-lg font-semibold rounded-lg hover:bg-white/10 transition-all duration-300"
             >
-              Learn More
+              {t("learnMore")}
             </a>
           </div>
         </div>
@@ -304,10 +286,10 @@ export default function Home({
             <span className="text-2xl font-bold">Monolingo</span>
           </div>
           <p className="mb-4" style={{ color: "var(--muted-foreground)" }}>
-            The complete language learning platform for Central Asia.
+            {t("completeLanguageLearningPlatform")}
           </p>
           <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
-            &copy; 2024 Monolingo. All rights reserved.
+            &copy; 2024 Monolingo. {t("allRightsReserved")}
           </p>
         </div>
       </footer>

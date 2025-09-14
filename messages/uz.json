@@ -1,4 +1,32 @@
 {
+  "LandingPage": {
+    "signIn": "Kirish",
+    "getStarted": "Boshlash",
+    "learnLanguagesWith": "Tillar bilan o'rganish",
+    "aiAndCommunity": "AI va jamoa",
+    "description": "Til sheriklari bilan bog'laning, AI botlar bilan mashq qiling, guruh muhokamalariga qo'shiling va jamoalar yarating. O'zbek, rus, ingliz, qozoq, qirg'iz, tojik va xitoy tillarini o'rganing.",
+    "startLearningFree": "Bepul o'rganishni boshlash",
+    "learnMore": "Ko'proq bilish",
+    "howMonolingoWorks": "Monolingo qanday ishlaydi",
+    "howMonolingoWorksDescription": "Markaziy Osiyoda tillarni o'rganish va o'rganuvchilar bilan bog'lanish uchun to'rtta oddiy usul.",
+    "chatWithLanguageMates": "Til sheriklari bilan suhbatlashish",
+    "chatWithLanguageMatesDescription": "Bir-bir suhbatlashish uchun ona tili so'zlovchilar va boshqa o'rganuvchilarni toping. Gapirishda mashq qiling, fikr-mulohaza oling va uzoq muddatli do'stliklar o'rnating.",
+    "practiceWithAIBots": "AI botlar bilan mashq qilish",
+    "practiceWithAIBotsDescription": "O'rganish uslubingizga moslashuvchan aqlli AI o'qituvchilar bilan 24/7 mashq qiling. Har qanday vaqtda, har qanday joyda mashq qiling va taraqqiyotingizni kuzating.",
+    "topicDiscussionGroupCalls": "Mavzular bo'yicha guruh muhokamalari",
+    "topicDiscussionGroupCallsDescription": "Qiziqarli mavzular bo'yicha boshqariladigan guruh muhokamalariga qo'shiling. Bir necha o'rganuvchilar bilan gapirishda mashq qiling va ona tili so'zlovchilaridan ekspert yo'riqnomasini oling.",
+    "joinCommunities": "Jamoalarga qo'shilish",
+    "joinCommunitiesDescription": "Yorqin o'rganish jamoalarining bir qismi bo'ling. Resurslarni baham ko'ring, muhim voqealarni nishonlang va boshqalarga til o'rganish safarida yordam bering.",
+    "readyToStartLearning": "O'rganishni boshlashga tayyormisiz?",
+    "readyToStartLearningDescription": "Markaziy Osiyoda tillarni birgalikda o'rganayotgan minglab o'rganuvchilar bilan qo'shiling.",
+    "completeLanguageLearningPlatform": "Markaziy Osiyo uchun to'liq til o'rganish platformasi.",
+    "allRightsReserved": "Barcha huquqlar himoyalangan."
+  },
+  "ThemeToggle": {
+    "light": "Kun",
+    "dark": "Tun",
+    "system": "Tizim"
+  },
   "LogoutButton": {
     "logout": "Chiqish"
   }
