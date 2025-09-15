@@ -6,8 +6,6 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { useRouter } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
-import GoogleIcon from "@/components/icons/GoogleIcon";
-import FacebookIcon from "@/components/icons/FacebookIcon";
 import { useTranslations } from "next-intl";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 // import { gql } from "@apollo/client";
@@ -55,13 +53,21 @@ const LoginPage = () => {
   };
 
   const onGoogleAuth = async (idToken: string) => {
-    const result = await googleAuthAction(idToken);
+    setIsLoading(true);
 
-    if (result?.success) {
-      return router.replace("/dashboard");
+    try {
+      const result = await googleAuthAction(idToken);
+
+      if (result?.success) {
+        return router.replace("/dashboard");
+      }
+
+      setError(result?.error || "Something went wrong");
+    } catch (error) {
+      setError(error as string);
+    } finally {
+      setIsLoading(false);
     }
-
-    setError(result?.error || "Something went wrong");
   };
 
   return (
@@ -201,7 +207,7 @@ const LoginPage = () => {
           </div>
 
           {/* Social Login */}
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="mt-6 grid grid-cols-1 gap-3">
             <GoogleOAuthProvider
               clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
             >
@@ -229,26 +235,9 @@ const LoginPage = () => {
                 e.currentTarget.style.backgroundColor = "var(--background)";
               }}
             >
-              <GoogleIcon className="w-5 h-5" />
-              <span className="ml-2">{t("google")}</span>
-            </button> */}
-            <button
-              className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--background)",
-                color: "var(--muted-foreground)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--muted)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--background)";
-              }}
-            >
               <FacebookIcon className="w-5 h-5" />
               <span className="ml-2">{t("facebook")}</span>
-            </button>
+            </button> */}
           </div>
 
           {/* Sign up link */}

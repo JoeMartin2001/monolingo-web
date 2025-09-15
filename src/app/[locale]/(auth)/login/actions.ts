@@ -59,15 +59,11 @@ export async function googleAuthAction(idToken: string) {
   try {
     const cookiesStore = await cookies();
 
-    console.log(idToken);
-
     const res = await googleAuth(idToken);
 
     if ("error" in res) {
       return { success: false, error: res.error };
     }
-
-    console.log(res);
 
     const { accessToken, refreshToken } = res.data;
 

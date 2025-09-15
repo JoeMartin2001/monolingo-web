@@ -8,12 +8,11 @@ import { Textarea } from "@/components/ui/Textarea";
 import AvatarInput from "@/components/ui/AvatarInput";
 import { languageOptions, levelOptions } from "@/config/constants/options";
 import { SignupUserInput } from "@/lib/auth/signup-user";
-import { register } from "./actions";
+import { register, registerWithGoogleAuthAction } from "./actions";
 import { useRouter } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
-import GoogleIcon from "@/components/icons/GoogleIcon";
-import FacebookIcon from "@/components/icons/FacebookIcon";
 import { useTranslations } from "next-intl";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -63,6 +62,24 @@ const RegisterPage = () => {
 
     setError(result.error || "Something went wrong");
     setIsLoading(false);
+  };
+
+  const onGoogleAuth = async (idToken: string) => {
+    setIsLoading(true);
+
+    try {
+      const result = await registerWithGoogleAuthAction(idToken);
+
+      if (result?.success) {
+        return router.replace("/dashboard");
+      }
+
+      setError(result?.error || "Something went wrong");
+    } catch (error) {
+      setError(error as string);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -296,41 +313,19 @@ const RegisterPage = () => {
           </div>
 
           {/* Social Login */}
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <button
-              className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--background)",
-                color: "var(--muted-foreground)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--muted)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--background)";
-              }}
+          <div className="mt-6 grid grid-cols-1 gap-3">
+            <GoogleOAuthProvider
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
             >
-              <GoogleIcon className="w-5 h-5" />
-              <span className="ml-2">{t("google")}</span>
-            </button>
-            <button
-              className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
-              style={{
-                borderColor: "var(--border)",
-                backgroundColor: "var(--background)",
-                color: "var(--muted-foreground)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--muted)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "var(--background)";
-              }}
-            >
-              <FacebookIcon className="w-5 h-5" />
-              <span className="ml-2">{t("facebook")}</span>
-            </button>
+              <GoogleLogin
+                onSuccess={(cred) => {
+                  const idToken = cred.credential!;
+
+                  onGoogleAuth(idToken);
+                }}
+                onError={() => console.log("Login Failed")}
+              />
+            </GoogleOAuthProvider>
           </div>
 
           {/* Sign in link */}
