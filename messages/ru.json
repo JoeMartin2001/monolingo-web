@@ -1,5 +1,7 @@
 {
   "LandingPage": {
+    "theme": "Тема",
+    "language": "Язык",
     "signIn": "Войти",
     "getStarted": "Начать",
     "learnLanguagesWith": "Изучайте языки с помощью",
@@ -25,7 +27,8 @@
   "ThemeToggle": {
     "light": "День",
     "dark": "Ночь",
-    "system": "Системная"
+    "system": "Системная",
+    "toggleTheme": "Переключить тему"
   },
   "LoginPage": {
     "welcomeBack": "Добро пожаловать",
@@ -93,5 +96,11 @@
   },
   "LogoutButton": {
     "logout": "Выйти"
+  },
+  "DrawerMenu": {
+    "close": "Закрыть",
+    "menu": "Меню",
+    "theme": "Тема",
+    "language": "Язык"
   }
 }

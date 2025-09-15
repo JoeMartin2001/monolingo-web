@@ -1,5 +1,7 @@
 {
   "LandingPage": {
+    "theme": "Theme",
+    "language": "Language",
     "signIn": "Sign In",
     "getStarted": "Get Started",
     "learnLanguagesWith": "Learn Languages with",
@@ -25,7 +27,8 @@
   "ThemeToggle": {
     "light": "Day",
     "dark": "Night",
-    "system": "System"
+    "system": "System",
+    "toggleTheme": "Toggle theme"
   },
   "LoginPage": {
     "welcomeBack": "Welcome back",
@@ -93,5 +96,11 @@
   },
   "LogoutButton": {
     "logout": "Logout"
+  },
+  "DrawerMenu": {
+    "close": "Close",
+    "menu": "Menu",
+    "theme": "Theme",
+    "language": "Language"
   }
 }

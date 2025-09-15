@@ -1,6 +1,8 @@
 import ThemeToggle from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { getTranslations } from "next-intl/server";
+import Link from "next/link";
+import { LandingDrawer } from "./components/LandingDrawer";
 
 export default async function Home() {
   const t = await getTranslations("LandingPage");
@@ -16,7 +18,7 @@ export default async function Home() {
     >
       {/* Navigation */}
       <nav
-        className="px-6 py-4 border-b"
+        className="px-4 sm:px-6 py-4 border-b"
         style={{
           backgroundColor: "var(--background)",
           borderColor: "var(--border)",
@@ -28,100 +30,96 @@ export default async function Home() {
               <span className="text-white font-bold text-lg">M</span>
             </div>
             <span
-              className="text-2xl font-bold"
+              className="text-xl sm:text-2xl font-bold"
               style={{ color: "var(--foreground)" }}
             >
               Monolingo
             </span>
           </div>
-          <div className="flex items-center space-x-4">
+
+          <LandingDrawer />
+
+          <div className="md:flex hidden items-center space-x-2 sm:space-x-4">
             <ThemeToggle />
             <LanguageSwitcher />
 
-            <a
+            <Link
               href="/login"
-              className="px-4 py-2 rounded-lg transition-colors hover:opacity-80"
-              style={{ color: "var(--muted-foreground)" }}
-            >
-              {t("signIn")}
-            </a>
-            <a
-              href="/register"
-              className="px-6 py-2 rounded-lg transition-colors"
+              className="px-3 sm:px-6 py-2 rounded-lg transition-colors text-sm sm:text-base"
               style={{
                 backgroundColor: "var(--primary)",
                 color: "var(--primary-foreground)",
               }}
             >
-              {t("getStarted")}
-            </a>
+              {t("signIn")}
+            </Link>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="px-6 py-20">
+      <section className="px-4 sm:px-6 py-12 sm:py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h1
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight"
             style={{ color: "var(--foreground)" }}
           >
             {t("learnLanguagesWith")}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block sm:inline">
               {" "}
               {t("aiAndCommunity")}
             </span>
           </h1>
           <p
-            className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
+            className="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed"
             style={{ color: "var(--muted-foreground)" }}
           >
             {t("description")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Link
               href="/register"
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-lg font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-base sm:text-lg font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               {t("startLearningFree")}
-            </a>
-            <a
+            </Link>
+            <Link
               href="/register"
-              className="px-8 py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 text-lg font-semibold rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300"
+              className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-blue-600 text-blue-600 dark:text-blue-400 text-base sm:text-lg font-semibold rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300"
             >
               {t("learnMore")}
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
       <section
-        className="px-6 py-20"
+        className="px-4 sm:px-6 py-12 sm:py-20"
         style={{ backgroundColor: "var(--muted)" }}
       >
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 sm:mb-16">
             <h2
-              className="text-4xl md:text-5xl font-bold mb-4"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4"
               style={{ color: "var(--foreground)" }}
             >
               {t("howMonolingoWorks")}
             </h2>
             <p
-              className="text-xl max-w-2xl mx-auto"
+              className="text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed"
               style={{ color: "var(--muted-foreground)" }}
             >
               {t("howMonolingoWorksDescription")}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-12">
             {/* Chat with Language Mates */}
             <div className="text-center">
-              <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <svg
-                  className="w-10 h-10 text-green-600"
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-green-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -135,13 +133,13 @@ export default async function Home() {
                 </svg>
               </div>
               <h3
-                className="text-2xl font-bold mb-4"
+                className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4"
                 style={{ color: "var(--foreground)" }}
               >
                 {t("chatWithLanguageMates")}
               </h3>
               <p
-                className="text-lg"
+                className="text-base sm:text-lg leading-relaxed"
                 style={{ color: "var(--muted-foreground)" }}
               >
                 {t("chatWithLanguageMatesDescription")}
@@ -150,9 +148,9 @@ export default async function Home() {
 
             {/* Practice with AI Bots */}
             <div className="text-center">
-              <div className="w-20 h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <svg
-                  className="w-10 h-10 text-blue-600"
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -166,13 +164,13 @@ export default async function Home() {
                 </svg>
               </div>
               <h3
-                className="text-2xl font-bold mb-4"
+                className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4"
                 style={{ color: "var(--foreground)" }}
               >
                 {t("practiceWithAIBots")}
               </h3>
               <p
-                className="text-lg"
+                className="text-base sm:text-lg leading-relaxed"
                 style={{ color: "var(--muted-foreground)" }}
               >
                 {t("practiceWithAIBotsDescription")}
@@ -181,9 +179,9 @@ export default async function Home() {
 
             {/* Topic Discussion Group Calls */}
             <div className="text-center">
-              <div className="w-20 h-20 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-purple-100 dark:bg-purple-900/30 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <svg
-                  className="w-10 h-10 text-purple-600"
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -197,13 +195,13 @@ export default async function Home() {
                 </svg>
               </div>
               <h3
-                className="text-2xl font-bold mb-4"
+                className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4"
                 style={{ color: "var(--foreground)" }}
               >
                 {t("topicDiscussionGroupCalls")}
               </h3>
               <p
-                className="text-lg"
+                className="text-base sm:text-lg leading-relaxed"
                 style={{ color: "var(--muted-foreground)" }}
               >
                 {t("topicDiscussionGroupCallsDescription")}
@@ -212,9 +210,9 @@ export default async function Home() {
 
             {/* Join Communities */}
             <div className="text-center">
-              <div className="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <svg
-                  className="w-10 h-10 text-orange-600"
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-orange-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -228,13 +226,13 @@ export default async function Home() {
                 </svg>
               </div>
               <h3
-                className="text-2xl font-bold mb-4"
+                className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4"
                 style={{ color: "var(--foreground)" }}
               >
                 {t("joinCommunities")}
               </h3>
               <p
-                className="text-lg"
+                className="text-base sm:text-lg leading-relaxed"
                 style={{ color: "var(--muted-foreground)" }}
               >
                 {t("joinCommunitiesDescription")}
@@ -245,50 +243,56 @@ export default async function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="px-6 py-20 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="px-4 sm:px-6 py-12 sm:py-20 bg-gradient-to-r from-blue-600 to-purple-600">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
             {t("readyToStartLearning")}
           </h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-lg sm:text-xl text-blue-100 mb-6 sm:mb-8 leading-relaxed">
             {t("readyToStartLearningDescription")}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Link
               href="/register"
-              className="px-8 py-4 bg-white text-blue-600 text-lg font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              className="px-6 sm:px-8 py-3 sm:py-4 bg-white text-blue-600 text-base sm:text-lg font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
               {t("startLearningFree")}
-            </a>
-            <a
+            </Link>
+            <Link
               href="/register"
-              className="px-8 py-4 border-2 border-white text-white text-lg font-semibold rounded-lg hover:bg-white/10 transition-all duration-300"
+              className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-white text-white text-base sm:text-lg font-semibold rounded-lg hover:bg-white/10 transition-all duration-300"
             >
               {t("learnMore")}
-            </a>
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Footer */}
       <footer
-        className="px-6 py-12"
+        className="px-4 sm:px-6 py-8 sm:py-12"
         style={{
           backgroundColor: "var(--secondary)",
           color: "var(--secondary-foreground)",
         }}
       >
         <div className="max-w-7xl mx-auto text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
+          <div className="flex items-center justify-center space-x-2 mb-3 sm:mb-4">
             <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">M</span>
             </div>
-            <span className="text-2xl font-bold">Monolingo</span>
+            <span className="text-xl sm:text-2xl font-bold">Monolingo</span>
           </div>
-          <p className="mb-4" style={{ color: "var(--muted-foreground)" }}>
+          <p
+            className="mb-3 sm:mb-4 text-sm sm:text-base"
+            style={{ color: "var(--muted-foreground)" }}
+          >
             {t("completeLanguageLearningPlatform")}
           </p>
-          <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
+          <p
+            className="text-xs sm:text-sm"
+            style={{ color: "var(--muted-foreground)" }}
+          >
             &copy; 2024 Monolingo. {t("allRightsReserved")}
           </p>
         </div>

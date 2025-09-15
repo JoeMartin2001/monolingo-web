@@ -1,5 +1,7 @@
 {
   "LandingPage": {
+    "theme": "Mavzu",
+    "language": "Til",
     "signIn": "Kirish",
     "getStarted": "Boshlash",
     "learnLanguagesWith": "Tillar bilan o'rganish",
@@ -25,7 +27,8 @@
   "ThemeToggle": {
     "light": "Kun",
     "dark": "Tun",
-    "system": "Tizim"
+    "system": "Tizim",
+    "toggleTheme": "Tema o'zgartirish"
   },
   "LoginPage": {
     "welcomeBack": "Xush kelibsiz",
@@ -93,5 +96,11 @@
   },
   "LogoutButton": {
     "logout": "Chiqish"
+  },
+  "DrawerMenu": {
+    "close": "Yopish",
+    "menu": "Menyu",
+    "theme": "Tema",
+    "language": "Til"
   }
 }
