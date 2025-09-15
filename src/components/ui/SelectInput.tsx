@@ -42,7 +42,7 @@ export const SelectInput = React.forwardRef<
         <div className="relative">
           <select
             ref={ref}
-            className={`appearance-none w-full px-4 py-3 pr-12 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${className}`}
+            className={`appearance-none w-full px-4 py-3 pr-12 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors ${className}`}
             style={{
               backgroundColor: "var(--input)",
               color: "var(--foreground)",
