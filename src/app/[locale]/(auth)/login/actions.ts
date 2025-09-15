@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { loginUser } from "@/lib/auth/login-user";
+import { googleAuth } from "@/lib/auth/google-auth";
 
 export type LoginState =
   | {
@@ -51,5 +52,37 @@ export async function authenticate(
       success: false,
       error: castedError.message || "Something went wrong, please try again.",
     } as LoginState;
+  }
+}
+
+export async function googleAuthAction(idToken: string) {
+  try {
+    const cookiesStore = await cookies();
+
+    console.log(idToken);
+
+    const res = await googleAuth(idToken);
+
+    if ("error" in res) {
+      return { success: false, error: res.error };
+    }
+
+    console.log(res);
+
+    const { accessToken, refreshToken } = res.data;
+
+    cookiesStore.set("accessToken", accessToken, {
+      httpOnly: true,
+      secure: true,
+    });
+
+    cookiesStore.set("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: true,
+    });
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error as string };
   }
 }

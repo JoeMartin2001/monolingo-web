@@ -1,6 +1,6 @@
 "use client";
 
-import { authenticate } from "./actions";
+import { authenticate, googleAuthAction } from "./actions";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
@@ -9,6 +9,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import FacebookIcon from "@/components/icons/FacebookIcon";
 import { useTranslations } from "next-intl";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 // import { gql } from "@apollo/client";
 // import getApolloClient from "@/lib/apollo-client";
 
@@ -32,6 +33,7 @@ const LoginPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -50,6 +52,16 @@ const LoginPage = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const onGoogleAuth = async (idToken: string) => {
+    const result = await googleAuthAction(idToken);
+
+    if (result?.success) {
+      return router.replace("/dashboard");
+    }
+
+    setError(result?.error || "Something went wrong");
   };
 
   return (
@@ -190,7 +202,20 @@ const LoginPage = () => {
 
           {/* Social Login */}
           <div className="mt-6 grid grid-cols-2 gap-3">
-            <button
+            <GoogleOAuthProvider
+              clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
+            >
+              <GoogleLogin
+                onSuccess={(cred) => {
+                  const idToken = cred.credential!;
+
+                  onGoogleAuth(idToken);
+                }}
+                onError={() => console.log("Login Failed")}
+              />
+            </GoogleOAuthProvider>
+
+            {/* <button
               className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
               style={{
                 borderColor: "var(--border)",
@@ -206,7 +231,7 @@ const LoginPage = () => {
             >
               <GoogleIcon className="w-5 h-5" />
               <span className="ml-2">{t("google")}</span>
-            </button>
+            </button> */}
             <button
               className="w-full inline-flex justify-center py-3 px-4 border rounded-lg shadow-sm text-sm font-medium transition-colors"
               style={{
