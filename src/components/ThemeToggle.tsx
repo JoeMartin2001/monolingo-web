@@ -29,17 +29,7 @@ export default function ThemeToggle() {
 
   const currentTheme = themes.find((t) => t.value === theme) || themes[2];
 
-  if (!mounted) {
-    return (
-      <div
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg"
-        style={{ color: "var(--muted-foreground)" }}
-      >
-        <span className="text-lg">💻</span>
-        <span className="inline">{t("system")}</span>
-      </div>
-    );
-  }
+  if (!mounted) return null;
 
   return (
     <Menu as="div" className="relative">
