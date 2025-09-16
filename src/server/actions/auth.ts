@@ -3,13 +3,14 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { getLocale } from "next-intl/server";
+import { DEFAULT_LOCALE } from "@/i18n/routing";
 
-export async function logout(formData: FormData) {
-  const locale = (formData.get("locale") as string) || routing.defaultLocale;
+export async function logout() {
+  const locale = await getLocale();
 
   (await cookies()).delete("accessToken");
   (await cookies()).delete("refreshToken");
 
-  redirect(`/${locale}/login`);
+  redirect(locale === DEFAULT_LOCALE ? `/login` : `/${locale}/login`);
 }
