@@ -5,6 +5,10 @@ import { routing } from "./i18n/routing";
 
 const intl = createMiddleware(routing);
 
+const injectLocale = (path: string, locale: string) => {
+  return locale === routing.defaultLocale ? path : `/${locale}${path}`;
+};
+
 export function middleware(req: NextRequest) {
   // 1) Ensure locale prefix or redirect based on NEXT_LOCALE/Accept-Language
   const i18nResponse = intl(req);
@@ -17,20 +21,11 @@ export function middleware(req: NextRequest) {
   // Extract current locale from /{locale}/...
   const locale = pathname.split("/")[1] || routing.defaultLocale;
 
-  const loginPath =
-    locale === routing.defaultLocale ? `/login` : `/${locale}/login`;
-  const registerPath =
-    locale === routing.defaultLocale ? `/register` : `/${locale}/register`;
-  const forgotPasswordPath =
-    locale === routing.defaultLocale
-      ? `/forgot-password`
-      : `/${locale}/forgot-password`;
-  const dashboardPath =
-    locale === routing.defaultLocale ? `/dashboard` : `/${locale}/dashboard`;
-  const resetPasswordPath =
-    locale === routing.defaultLocale
-      ? `/reset-password`
-      : `/${locale}/reset-password`;
+  const loginPath = injectLocale(`/login`, locale);
+  const registerPath = injectLocale(`/register`, locale);
+  const forgotPasswordPath = injectLocale(`/forgot-password`, locale);
+  const dashboardPath = injectLocale(`/dashboard`, locale);
+  const resetPasswordPath = injectLocale(`/reset-password`, locale);
 
   const isDashboard = pathname.startsWith(dashboardPath);
   const isAuthPage =
@@ -38,6 +33,7 @@ export function middleware(req: NextRequest) {
     pathname === registerPath ||
     pathname === forgotPasswordPath ||
     pathname === resetPasswordPath;
+
   const isLocaleRoot = pathname === `/${locale}`; // e.g., /en
 
   // Not logged in → block dashboard
@@ -45,6 +41,7 @@ export function middleware(req: NextRequest) {
     if (isDashboard) {
       return NextResponse.redirect(new URL(loginPath, req.url));
     }
+
     return NextResponse.next();
   }
 
