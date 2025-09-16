@@ -1,3 +1,5 @@
+import { fetchWithI18n } from "@/lib/fetcher";
+
 export type ResetPasswordInput = {
   token: string;
   newPassword: string;
@@ -16,7 +18,7 @@ export async function resetPassword(
 ): Promise<ResetPasswordResponse> {
   console.log(input);
 
-  const res = await fetch(process.env.API_URL + "/graphql", {
+  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

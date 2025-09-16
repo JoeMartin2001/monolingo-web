@@ -1,5 +1,6 @@
 // lib/auth.ts
 import { cookies as getCookies } from "next/headers";
+import { fetchWithI18n } from "@/lib/fetcher";
 
 export async function getValidAccessToken() {
   const cookieStore = await getCookies();
@@ -16,7 +17,7 @@ export async function getValidAccessToken() {
   if (!refreshToken) return null;
 
   // call backend refresh mutation
-  const res = await fetch(process.env.API_URL + "/graphql", {
+  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

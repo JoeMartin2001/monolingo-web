@@ -1,3 +1,5 @@
+import { fetchWithI18n } from "@/lib/fetcher";
+
 type LoginUserResponse =
   | {
       data: {
@@ -13,9 +15,11 @@ export async function loginUser(
   email: string,
   password: string
 ): Promise<LoginUserResponse> {
-  const res = await fetch(process.env.API_URL + "/graphql", {
+  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       query: `
           mutation Login($email: String!, $password: String!) {

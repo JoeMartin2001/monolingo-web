@@ -3,7 +3,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
-import ThemeToggle from "@/components/ThemeToggle";
 import { useTranslations } from "next-intl";
 import { requestPasswordResetAction } from "./actions";
 import { useRouter } from "next/navigation";
@@ -46,11 +45,6 @@ const ForgotPasswordPage = () => {
       }}
     >
       <div className="max-w-md w-full">
-        {/* Theme Toggle */}
-        <div className="flex justify-end mb-4">
-          <ThemeToggle />
-        </div>
-
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-6">

@@ -5,8 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { useRouter } from "next/navigation";
-import ThemeToggle from "@/components/ThemeToggle";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 // import { gql } from "@apollo/client";
 // import getApolloClient from "@/lib/apollo-client";
@@ -25,6 +24,7 @@ import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 const LoginPage = () => {
   const router = useRouter();
   const t = useTranslations("LoginPage");
+  const locale = useLocale();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -80,11 +80,6 @@ const LoginPage = () => {
       }}
     >
       <div className="max-w-md w-full">
-        {/* Theme Toggle */}
-        <div className="flex justify-end mb-4">
-          <ThemeToggle />
-        </div>
-
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-2 mb-6">
@@ -212,6 +207,7 @@ const LoginPage = () => {
               clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}
             >
               <GoogleLogin
+                locale={locale}
                 onSuccess={(cred) => {
                   const idToken = cred.credential!;
 

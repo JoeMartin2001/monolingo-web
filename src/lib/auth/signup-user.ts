@@ -1,3 +1,5 @@
+import { fetchWithI18n } from "@/lib/fetcher";
+
 export type SignupUserInput = {
   email: string;
   password: string;
@@ -39,7 +41,7 @@ export async function signupUser(
     }
   }
 
-  const res = await fetch(process.env.API_URL + "/graphql", {
+  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
