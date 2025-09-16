@@ -17,12 +17,27 @@ export function middleware(req: NextRequest) {
   // Extract current locale from /{locale}/...
   const locale = pathname.split("/")[1] || routing.defaultLocale;
 
-  const loginPath = `/${locale}/login`;
-  const registerPath = `/${locale}/register`;
-  const dashboardPath = `/${locale}/dashboard`;
+  const loginPath =
+    locale === routing.defaultLocale ? `/login` : `/${locale}/login`;
+  const registerPath =
+    locale === routing.defaultLocale ? `/register` : `/${locale}/register`;
+  const forgotPasswordPath =
+    locale === routing.defaultLocale
+      ? `/forgot-password`
+      : `/${locale}/forgot-password`;
+  const dashboardPath =
+    locale === routing.defaultLocale ? `/dashboard` : `/${locale}/dashboard`;
+  const resetPasswordPath =
+    locale === routing.defaultLocale
+      ? `/reset-password`
+      : `/${locale}/reset-password`;
 
   const isDashboard = pathname.startsWith(dashboardPath);
-  const isAuthPage = pathname === loginPath || pathname === registerPath;
+  const isAuthPage =
+    pathname === loginPath ||
+    pathname === registerPath ||
+    pathname === forgotPasswordPath ||
+    pathname === resetPasswordPath;
   const isLocaleRoot = pathname === `/${locale}`; // e.g., /en
 
   // Not logged in → block dashboard

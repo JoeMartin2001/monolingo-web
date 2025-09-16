@@ -1,3 +1,3 @@
-type TLocale = "en" | "uz" | "ru";
+export type TLocale = "en" | "uz" | "ru";
 
 export const LOCALES: TLocale[] = ["en", "uz", "ru"];
