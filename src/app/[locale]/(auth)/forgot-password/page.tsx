@@ -101,37 +101,6 @@ const ForgotPasswordPage = () => {
             )}
           </form>
 
-          {/* Success Message (hidden by default) */}
-          <div
-            className="mt-6 p-4 rounded-lg"
-            style={{
-              backgroundColor: "var(--muted)",
-              border: "1px solid var(--border)",
-            }}
-          >
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <svg
-                  className="h-5 w-5"
-                  style={{ color: "var(--primary)" }}
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm" style={{ color: "var(--foreground)" }}>
-                  {t("passwordResetLinkSent")}
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* Back to login */}
           <div className="mt-6 text-center">
             <p className="text-sm" style={{ color: "var(--muted-foreground)" }}>
