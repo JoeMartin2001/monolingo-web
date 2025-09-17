@@ -1,59 +1,71 @@
+// middleware.ts
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
+import { TLocale } from "./config/constants/locales";
 
 const intl = createMiddleware(routing);
 
-const injectLocale = (path: string, locale: string) => {
-  return locale === routing.defaultLocale ? path : `/${locale}${path}`;
-};
+// segment-safe matcher
+const isAt = (pathname: string, base: string) =>
+  pathname === base || pathname.startsWith(`${base}/`);
 
 export function middleware(req: NextRequest) {
-  // 1) Ensure locale prefix or redirect based on NEXT_LOCALE/Accept-Language
-  const i18nResponse = intl(req);
-  if (i18nResponse) return i18nResponse;
+  // 1) Run next-intl first
+  const intlRes = intl(req);
 
-  // 2) Auth checks (locale-aware)
-  const { pathname } = req.nextUrl;
+  // If next-intl triggered a REDIRECT, return immediately
+  const isRedirect = intlRes?.headers.has("location");
+  if (isRedirect) return intlRes!;
+
+  // If next-intl triggered a REWRITE, read its target and use it for auth checks
+  const rewriteHeader = intlRes?.headers.get("x-middleware-rewrite");
+  const effectivePathname = rewriteHeader
+    ? new URL(rewriteHeader).pathname
+    : req.nextUrl.pathname;
+
+  // 2) Auth checks based on the effective (possibly rewritten) pathname
   const accessToken = req.cookies.get("accessToken")?.value;
 
-  // Extract current locale from /{locale}/...
-  const locale = pathname.split("/")[1] || routing.defaultLocale;
+  const firstSeg = effectivePathname.split("/")[1] ?? "";
+  const hasLocalePrefix = routing.locales.includes(firstSeg as TLocale);
+  const locale = hasLocalePrefix ? firstSeg : routing.defaultLocale;
 
-  const loginPath = injectLocale(`/login`, locale);
-  const registerPath = injectLocale(`/register`, locale);
-  const forgotPasswordPath = injectLocale(`/forgot-password`, locale);
-  const dashboardPath = injectLocale(`/dashboard`, locale);
-  const resetPasswordPath = injectLocale(`/reset-password`, locale);
+  const withLocale = (p: string) =>
+    hasLocalePrefix && locale !== routing.defaultLocale ? `/${locale}${p}` : p;
 
-  const isDashboard = pathname.startsWith(dashboardPath);
+  const loginPath = withLocale("/login");
+  const registerPath = withLocale("/register");
+  const forgotPasswordPath = withLocale("/forgot-password");
+  const resetPasswordPath = withLocale("/reset-password");
+  const dashboardPath = withLocale("/dashboard");
+
+  const isDashboard = isAt(effectivePathname, dashboardPath);
   const isAuthPage =
-    pathname === loginPath ||
-    pathname === registerPath ||
-    pathname === forgotPasswordPath ||
-    pathname === resetPasswordPath;
+    effectivePathname === loginPath ||
+    effectivePathname === registerPath ||
+    effectivePathname === forgotPasswordPath ||
+    effectivePathname === resetPasswordPath;
 
-  const isLocaleRoot = pathname === `/${locale}`; // e.g., /en
+  const isLocaleRoot = hasLocalePrefix && effectivePathname === `/${locale}`;
 
   // Not logged in → block dashboard
-  if (!accessToken) {
-    if (isDashboard) {
-      return NextResponse.redirect(new URL(loginPath, req.url));
-    }
-
-    return NextResponse.next();
+  if (!accessToken && isDashboard) {
+    return NextResponse.redirect(new URL(loginPath, req.url));
   }
 
-  // Logged in → block auth pages and locale root
+  // Logged in → block auth pages & locale root
   if (accessToken && (isAuthPage || isLocaleRoot)) {
     return NextResponse.redirect(new URL(dashboardPath, req.url));
   }
 
-  return NextResponse.next();
+  // 3) No auth redirect → return next-intl's response if it exists (preserves rewrite),
+  //    otherwise just continue.
+  return intlRes ?? NextResponse.next();
 }
 
-// Single, clean matcher: all non-static, non-API routes
+// Non-static, non-API routes
 export const config = {
   matcher: ["/((?!api|trpc|_next|_vercel|.*\\..*).*)"],
 };

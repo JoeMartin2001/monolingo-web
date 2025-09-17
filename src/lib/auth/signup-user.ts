@@ -26,29 +26,29 @@ export async function signupUser(
   input: SignupUserInput
 ): Promise<SignupUserResponse> {
   // Handle avatar upload - convert to data URL for now
-  let avatarUrl = "";
-  if (input.avatar) {
-    try {
-      avatarUrl = await new Promise<string>((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.onerror = reject;
-        reader.readAsDataURL(input.avatar!);
-      });
-    } catch (error) {
-      console.error("Error converting avatar to data URL:", error);
-      // Continue without avatar
-    }
-  }
+  // let avatarUrl = "";
+  // if (input.avatar) {
+  //   try {
+  //     avatarUrl = await new Promise<string>((resolve, reject) => {
+  //       const reader = new FileReader();
+  //       reader.onload = () => resolve(reader.result as string);
+  //       reader.onerror = reject;
+  //       reader.readAsDataURL(input.avatar!);
+  //     });
+  //   } catch (error) {
+  //     console.error("Error converting avatar to data URL:", error);
+  //     // Continue without avatar
+  //   }
+  // }
 
   const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `
-            mutation SignUp($email: String!, $password: String!, $username: String!, $nativeLanguage: String!, $targetLanguage: String!, $level: LanguageLevel!, $bio: String!, $avatarUrl: String!) {
+            mutation SignUp($email: String!, $password: String!, $username: String!, $nativeLanguage: String!, $targetLanguage: String!, $level: LanguageLevel!, $bio: String!) {
                 signup(
-                    input: {email: $email, bio: $bio, username: $username, avatarUrl: $avatarUrl, nativeLanguage: $nativeLanguage, targetLanguage: $targetLanguage, level: $level, password: $password}
+                    input: {email: $email, bio: $bio, username: $username, nativeLanguage: $nativeLanguage, targetLanguage: $targetLanguage, level: $level, password: $password}
                 ) {
                     accessToken
                     refreshToken
@@ -57,7 +57,7 @@ export async function signupUser(
       `,
       variables: {
         ...input,
-        avatarUrl,
+        // avatarUrl,
       },
     }),
   });

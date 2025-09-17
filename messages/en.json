@@ -119,5 +119,21 @@
     "menu": "Menu",
     "theme": "Theme",
     "language": "Language"
+  },
+  "VerifyEmail": {
+    "invalidToken": "Invalid Token",
+    "invalidTokenDescription": "The verification token is missing or invalid. Please check your email and try again.",
+    "emailVerified": "Email Verified!",
+    "emailVerifiedDescription": "Your email has been successfully verified. You can now sign in to your account.",
+    "alreadyVerified": "Already Verified",
+    "alreadyVerifiedDescription": "Your email has already been verified. You can sign in to your account.",
+    "tokenExpired": "Token Expired",
+    "tokenExpiredDescription": "The verification token has expired. Please register again to receive a new verification email.",
+    "verificationFailed": "Verification Failed",
+    "verificationFailedDescription": "We couldn't verify your email. The token may have expired or is invalid.",
+    "verifying": "Verifying Email",
+    "pleaseWait": "Please wait while we verify your email address...",
+    "registerAgain": "Register Again",
+    "signIn": "Sign In"
   }
 }

@@ -119,5 +119,21 @@
     "menu": "Menyu",
     "theme": "Tema",
     "language": "Til"
+  },
+  "VerifyEmail": {
+    "invalidToken": "Noto'g'ri token",
+    "invalidTokenDescription": "Tasdiqlash tokeni yo'q yoki noto'g'ri. Iltimos, elektron pochtangizni tekshiring va qayta urinib ko'ring.",
+    "emailVerified": "Email tasdiqlandi!",
+    "emailVerifiedDescription": "Sizning emailingiz muvaffaqiyatli tasdiqlandi. Endi hisobingizga kira olasiz.",
+    "alreadyVerified": "Allaqachon tasdiqlangan",
+    "alreadyVerifiedDescription": "Sizning emailingiz allaqachon tasdiqlangan. Hisobingizga kira olasiz.",
+    "tokenExpired": "Token muddati tugagan",
+    "tokenExpiredDescription": "Tasdiqlash tokeni muddati tugagan. Yangi tasdiqlash xatini olish uchun qayta ro'yxatdan o'ting.",
+    "verificationFailed": "Tasdiqlash muvaffaqiyatsiz",
+    "verificationFailedDescription": "Sizning emailingizni tasdiqlay olmadik. Token muddati tugagan yoki noto'g'ri bo'lishi mumkin.",
+    "verifying": "Email tasdiqlanmoqda",
+    "pleaseWait": "Iltimos, elektron pochtangizni tasdiqlashimizni kuting...",
+    "registerAgain": "Qayta ro'yxatdan o'tish",
+    "signIn": "Kirish"
   }
 }
