@@ -17,11 +17,13 @@ export async function getValidAccessToken() {
   if (!refreshToken) return null;
 
   // call backend refresh mutation
-  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `
+  const res = await fetchWithI18n(
+    process.env.NEXT_PUBLIC_API_URL + "/graphql",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `
         mutation RefreshToken($refreshToken: String!) {
           refreshToken(refreshToken: $refreshToken) {
             accessToken
@@ -29,9 +31,10 @@ export async function getValidAccessToken() {
           }
         }
       `,
-      variables: { refreshToken },
-    }),
-  });
+        variables: { refreshToken },
+      }),
+    }
+  );
 
   const { data } = await res.json();
   if (!data?.refreshToken) return null;

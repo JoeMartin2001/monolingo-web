@@ -15,13 +15,15 @@ export async function loginUser(
   email: string,
   password: string
 ): Promise<LoginUserResponse> {
-  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
+  const res = await fetchWithI18n(
+    process.env.NEXT_PUBLIC_API_URL + "/graphql",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: `
           mutation Login($email: String!, $password: String!) {
               login(input: { email: $email, password: $password }) {
                   accessToken
@@ -29,9 +31,10 @@ export async function loginUser(
               }
           }
         `,
-      variables: { email, password },
-    }),
-  });
+        variables: { email, password },
+      }),
+    }
+  );
   const json = await res.json();
 
   if (json.errors) {

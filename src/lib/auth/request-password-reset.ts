@@ -11,18 +11,21 @@ type RequestPasswordResetResponse =
 export async function requestPasswordReset(
   email: string
 ): Promise<RequestPasswordResetResponse> {
-  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `
+  const res = await fetchWithI18n(
+    process.env.NEXT_PUBLIC_API_URL + "/graphql",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `
           mutation RequestPasswordReset($email: String!) {
             requestPasswordReset(input: { email: $email })
           }
         `,
-      variables: { email },
-    }),
-  });
+        variables: { email },
+      }),
+    }
+  );
 
   const json = await res.json();
 

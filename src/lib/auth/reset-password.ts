@@ -18,18 +18,21 @@ export async function resetPassword(
 ): Promise<ResetPasswordResponse> {
   console.log(input);
 
-  const res = await fetchWithI18n(process.env.API_URL + "/graphql", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `
+  const res = await fetchWithI18n(
+    process.env.NEXT_PUBLIC_API_URL + "/graphql",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `
             mutation ResetPassword($input: ResetPasswordInput!) {
                 resetPassword(input: $input)
             }
         `,
-      variables: { input },
-    }),
-  });
+        variables: { input },
+      }),
+    }
+  );
 
   const json = await res.json();
 
