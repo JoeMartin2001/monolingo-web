@@ -90,6 +90,7 @@
     "enterYourEmailAddress": "Elektron pochta manzilingizni kiriting",
     "sendResetLink": "Tiklash havolasini yuborish",
     "sendingResetLink": "Tiklash havolasi yuborilmoqda...",
+    "passwordResetLinkSent": "Parolni tiklash havolasi yuborildi! Ko'rsatmalar uchun elektron pochtangizni tekshiring.",
     "rememberYourPassword": "Parolingizni eslab qoldingizmi?",
     "signIn": "Kirish",
     "backToHome": "← Bosh sahifaga qaytish"

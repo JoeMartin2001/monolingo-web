@@ -90,6 +90,7 @@
     "enterYourEmailAddress": "Enter your email address",
     "sendResetLink": "Send reset link",
     "sendingResetLink": "Sending reset link...",
+    "passwordResetLinkSent": "Password reset link sent! Check your email for instructions.",
     "rememberYourPassword": "Remember your password?",
     "signIn": "Sign in",
     "backToHome": "← Back to home"

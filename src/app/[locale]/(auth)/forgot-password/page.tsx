@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { Input } from "@/components/ui/Input";
 import { useTranslations } from "next-intl";
 import { requestPasswordResetAction } from "./actions";
@@ -24,6 +25,8 @@ const ForgotPasswordPage = () => {
       const result = await requestPasswordResetAction(email);
 
       if (result.success) {
+        toast.success(t("passwordResetLinkSent"));
+
         return router.replace("/login");
       }
 
