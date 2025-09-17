@@ -8,6 +8,6 @@ export async function logout() {
   (await cookies()).delete("accessToken");
   (await cookies()).delete("refreshToken");
 
-  revalidatePath("/dashboard");
+  revalidatePath("/explore");
   redirect("/login");
 }

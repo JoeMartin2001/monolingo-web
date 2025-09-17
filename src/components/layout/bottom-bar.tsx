@@ -27,7 +27,7 @@ export const NavLinkIconMap = {
 export const NAV_ITEMS: NavItem[] = [
   {
     label: "Explore",
-    href: "/dashboard",
+    href: "/explore",
     icon: "Explore",
   },
   {
@@ -62,7 +62,7 @@ export function BottomBar() {
       {NAV_ITEMS.map((item) => {
         const isActive =
           pathname === item.href ||
-          (item.href !== "/dashboard" && pathname.startsWith(item.href));
+          (item.href !== "/explore" && pathname.startsWith(item.href));
 
         const IconComponent = item.icon
           ? NavLinkIconMap[item.icon as keyof typeof NavLinkIconMap]

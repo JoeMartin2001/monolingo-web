@@ -43,7 +43,7 @@ export async function authenticate(
       maxAge: rememberMe ? 30 * 24 * 60 * 60 : undefined,
     });
 
-    // Redirect to dashboard
+    // Redirect to explore
     return { success: true };
   } catch (error) {
     const castedError = error as Error;

@@ -39,9 +39,9 @@ export function middleware(req: NextRequest) {
   const registerPath = withLocale("/register");
   const forgotPasswordPath = withLocale("/forgot-password");
   const resetPasswordPath = withLocale("/reset-password");
-  const dashboardPath = withLocale("/dashboard");
+  const explorePath = withLocale("/explore");
 
-  const isDashboard = isAt(effectivePathname, dashboardPath);
+  const isExplore = isAt(effectivePathname, explorePath);
   const isAuthPage =
     effectivePathname === loginPath ||
     effectivePathname === registerPath ||
@@ -50,14 +50,14 @@ export function middleware(req: NextRequest) {
 
   const isLocaleRoot = hasLocalePrefix && effectivePathname === `/${locale}`;
 
-  // Not logged in → block dashboard
-  if (!accessToken && isDashboard) {
+  // Not logged in → block explore
+  if (!accessToken && isExplore) {
     return NextResponse.redirect(new URL(loginPath, req.url));
   }
 
   // Logged in → block auth pages & locale root
   if (accessToken && (isAuthPage || isLocaleRoot)) {
-    return NextResponse.redirect(new URL(dashboardPath, req.url));
+    return NextResponse.redirect(new URL(explorePath, req.url));
   }
 
   // 3) No auth redirect → return next-intl's response if it exists (preserves rewrite),

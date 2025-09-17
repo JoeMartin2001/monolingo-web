@@ -56,7 +56,7 @@ const RegisterPage = () => {
     if (result.success) {
       setError(null);
 
-      return router.replace("/dashboard");
+      return router.replace("/explore");
     }
 
     setError(result.error || "Something went wrong");
@@ -70,7 +70,7 @@ const RegisterPage = () => {
       const result = await registerWithGoogleAuthAction(idToken);
 
       if (result?.success) {
-        return router.replace("/dashboard");
+        return router.replace("/explore");
       }
 
       setError(result?.error || "Something went wrong");

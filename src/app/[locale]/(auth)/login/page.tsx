@@ -41,7 +41,7 @@ const LoginPage = () => {
       const result = await authenticate(email, password, rememberMe);
 
       if (result.success) {
-        return router.replace("/dashboard");
+        return router.replace("/explore");
       }
 
       setError(result.error || "Something went wrong");
@@ -59,7 +59,7 @@ const LoginPage = () => {
       const result = await googleAuthAction(idToken);
 
       if (result?.success) {
-        return router.replace("/dashboard");
+        return router.replace("/explore");
       }
 
       setError(result?.error || "Something went wrong");
