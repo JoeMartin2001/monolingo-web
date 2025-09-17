@@ -8,7 +8,6 @@ import ExploreIcon from "@/components/icons/ExploreIcon";
 import MessagesIcon from "@/components/icons/MessagesIcon";
 import GroupsIcon from "@/components/icons/GroupsIcon";
 import ProfileIcon from "@/components/icons/ProfileIcon";
-import SettingsIcon from "@/components/icons/SettingsIcon";
 
 interface NavItem {
   label: string;
@@ -21,7 +20,6 @@ export const NavLinkIconMap = {
   Messages: MessagesIcon,
   Groups: GroupsIcon,
   Profile: ProfileIcon,
-  Settings: SettingsIcon,
 };
 
 export const NAV_ITEMS: NavItem[] = [
@@ -31,7 +29,7 @@ export const NAV_ITEMS: NavItem[] = [
     icon: "Explore",
   },
   {
-    label: "Messages",
+    label: "Chats",
     href: "/chat",
     icon: "Messages",
   },
@@ -44,11 +42,6 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Profile",
     href: "/profile",
     icon: "Profile",
-  },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: "Settings",
   },
 ];
 
