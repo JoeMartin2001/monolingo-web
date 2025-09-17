@@ -25,7 +25,11 @@ export default function VerifyEmailClient({ token }: { token?: string }) {
         desc={t("invalidTokenDescription")}
       >
         <Link
-          className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          className="px-6 py-3 rounded-lg transition-colors hover:opacity-90"
+          style={{
+            backgroundColor: "var(--primary)",
+            color: "var(--primary-foreground)",
+          }}
           href="/register"
         >
           {t("registerAgain")}
@@ -58,7 +62,11 @@ export default function VerifyEmailClient({ token }: { token?: string }) {
         desc={t("alreadyVerifiedDescription")}
       >
         <Link
-          className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          className="px-6 py-3 rounded-lg transition-colors hover:opacity-90"
+          style={{
+            backgroundColor: "var(--primary)",
+            color: "var(--primary-foreground)",
+          }}
           href="/login"
         >
           {t("signIn")}
@@ -75,11 +83,22 @@ export default function VerifyEmailClient({ token }: { token?: string }) {
         desc={t("tokenExpiredDescription")}
       >
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link className="btn-primary" href="/register">
+          <Link
+            className="px-6 py-3 rounded-lg transition-colors hover:opacity-90"
+            style={{
+              backgroundColor: "var(--primary)",
+              color: "var(--primary-foreground)",
+            }}
+            href="/register"
+          >
             {t("registerAgain")}
           </Link>
           <Link
-            className="px-6 py-3 border border-border rounded-lg hover:bg-muted transition-colors"
+            className="px-6 py-3 border rounded-lg transition-colors hover:opacity-80"
+            style={{
+              borderColor: "var(--border)",
+              color: "var(--foreground)",
+            }}
             href="/login"
           >
             {t("signIn")}
@@ -98,12 +117,23 @@ export default function VerifyEmailClient({ token }: { token?: string }) {
     >
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
-          className="px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+          className="px-6 py-3 rounded-lg transition-colors hover:opacity-90"
+          style={{
+            backgroundColor: "var(--primary)",
+            color: "var(--primary-foreground)",
+          }}
           href="/register"
         >
           {t("registerAgain")}
         </Link>
-        <Link className="btn-outline" href="/login">
+        <Link
+          className="px-6 py-3 border rounded-lg transition-colors hover:opacity-80"
+          style={{
+            borderColor: "var(--border)",
+            color: "var(--foreground)",
+          }}
+          href="/login"
+        >
           {t("signIn")}
         </Link>
       </div>
@@ -171,7 +201,14 @@ function CenteredCard({
   const { icon, bgColor, textColor } = getIconAndColors();
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div
+      className="min-h-screen flex items-center justify-center px-4"
+      style={{
+        background: "var(--background)",
+        backgroundImage:
+          "linear-gradient(to bottom right, var(--muted), var(--secondary))",
+      }}
+    >
       <div className="max-w-md w-full text-center">
         <div
           className={`w-16 h-16 ${bgColor} ${textColor} rounded-full flex items-center justify-center mx-auto mb-4`}
